@@ -24,7 +24,7 @@ const Item = ({ children }: { children: React.ReactNode }) => {
     };
   }, []);
 
-  const y = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], ["0px", "0px", `${viewportHeight * 0.5}px`, "0px"]);
+  const y = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], ["0px", "0px", `${viewportHeight * 0.6}px`, "0px"]);
   const opacity = useTransform(scrollYProgress, [0, 0.25, 0.6, 0.8], [0, 1, 1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.3, 0.6, 1], [0.6, 1, 1, 0.6]);
 
@@ -32,7 +32,7 @@ const Item = ({ children }: { children: React.ReactNode }) => {
     <motion.div ref={ref} className="h-[100vh] flex items-start justify-center w-full">
       <motion.div
         style={{ y, opacity, scale }}
-        className="border w-full xl:w-[400px] h-[320px] flex items-center justify-center"
+        className="border border-white/20 w-full xl:w-[40vw] h-[40vh] flex items-center justify-center bg-black/40 backdrop-blur-lg rounded-[28px]"
       >
         {children}
       </motion.div>
@@ -42,15 +42,15 @@ const Item = ({ children }: { children: React.ReactNode }) => {
 
 const Layer2D = () => {
   return (
-    <div>
+    <section className="absolute top-0 left-0 z-[99999999] w-full">
       <div className="h-[100vh]">Self description</div>
 
-      <Item key={1}>First Project</Item>
-      <Item key={2}>Second Project</Item>
-      <Item key={3}>Third Project</Item>
+      <Item>First Project</Item>
+      <Item>Second Project</Item>
+      <Item>Third Project</Item>
 
       <div className="h-[70vh]">Contact</div>
-    </div>
+    </section>
   );
 };
 
