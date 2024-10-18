@@ -1,48 +1,26 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import useLenis from "@/hooks/useLenis";
-import useDisplay from "@/hooks/useDisplay";
 
 const Item = ({ children }: { children: React.ReactNode }) => {
   const ref = useRef(null);
-  const [viewportHeight, setViewportHeight] = useState(0);
 
-  const { isDesktop } = useDisplay();
+  useLenis();
 
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
 
-  useEffect(() => {
-    const handleResize = () => {
-      setViewportHeight(window.innerHeight);
-    };
-
-    handleResize(); // Set initial height
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  useLenis();
-
-  const y = useTransform(
-    scrollYProgress,
-    [0, 0.2, 0.8, 1],
-    ["0px", "0px", `${isDesktop ? viewportHeight * 0.6 : 0}px`, "0px"]
-  );
-  const opacity = useTransform(scrollYProgress, [0, 0.25, 0.6, 0.8], [0, 1, 1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.3, 0.6, 1], [0.6, 1, 1, 0.6]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.45, 0.6, 0.68], [0, 0, 1, 1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.35, 0.5, 0.6, 0.78], [0.6, 0.6, 1, 1, 0.6]);
 
   return (
-    <motion.div ref={ref} className="h-[100vh] flex items-start justify-center w-full">
+    <motion.div ref={ref} className="h-fit flex items-start justify-center w-full xl:my-[20px]">
       <motion.div
-        style={{ y, opacity, scale }}
-        className="border border-[#ffffff28] w-full xl:w-[40vw] h-[40vh] flex items-center justify-center bg-black/40 backdrop-blur-lg rounded-[28px]"
+        style={{ opacity, scale, willChange: "transform, opacity" }}
+        className="z-[99999999] border border-[#ffffff28] w-full xl:w-[40vw] h-[40vh] flex items-center justify-center bg-black/40 backdrop-blur-lg rounded-[28px]"
       >
         {children}
       </motion.div>
@@ -52,10 +30,16 @@ const Item = ({ children }: { children: React.ReactNode }) => {
 
 const Layer2D = () => {
   return (
-    <section className="absolute top-0 left-0 z-[99999999] w-full">
+    <section className="relative top-0 left-0 z-[99999999] w-full">
       <div className="h-[100vh]">Self description</div>
 
-      <Item>First Project</Item>
+      <Item>
+        <div className="p-5">
+          <h2 className="text-3xl">Renault — Xperiencemor3 2023.07.13 ~ 2023.11.29 -</h2>
+          [github](https://github.com/FashionInTech/renault-nfts-front) - 소개 영상
+          [링크](https://www.youtube.com/watch?v=5VrAH1Cquh4)
+        </div>
+      </Item>
       <Item>Second Project</Item>
       <Item>Third Project</Item>
 

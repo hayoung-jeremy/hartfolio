@@ -1,9 +1,10 @@
 import { useEffect } from "react";
+import { isAppleDevice } from "@/utils";
 import { destroyLenis, initializeLenis } from "@/utils/lenis";
 
 const useLenis = () => {
   useEffect(() => {
-    initializeLenis();
+    if (!isAppleDevice()) initializeLenis();
 
     return () => {
       destroyLenis();

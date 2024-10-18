@@ -6,7 +6,7 @@ import { EnvironmentSettings } from "../three";
 
 const Layer3D = () => {
   return (
-    <section className="w-full h-[100vh] fixed top-0 left-0">
+    <section className="w-full h-[100vh] fixed top-0 left-0 z-[1]">
       <Canvas>
         <Box></Box>
         <EnvironmentSettings />
