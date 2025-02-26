@@ -15,14 +15,14 @@ const Item = ({ children }: { children: React.ReactNode }) => {
     offset: ["start end", "end start"],
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.45, 0.6, 0.68], [0, 0, 1, 1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.35, 0.5, 0.6, 0.78], [0.6, 0.6, 1, 1, 0.6]);
+  const opacity = useTransform(scrollYProgress, [0, 0.1, 0.15, 0.8, 0.85], [0, 0, 1, 1, 0]);
+  // const scale = useTransform(scrollYProgress, [0, 0.15, 0.5, 0.8, 0.88], [0.6, 0.6, 1, 1, 0.6]);
 
   return (
     <motion.div ref={ref} className="h-fit flex items-start justify-center w-full xl:my-[20px]">
       <motion.div
-        style={{ opacity, scale, willChange: "transform, opacity" }}
-        className="z-[100] border border-[#ffffff28] w-full xl:w-[40vw] h-[40vh] flex items-center justify-center bg-black/80 backdrop-blur-lg rounded-[28px]"
+        style={{ opacity, willChange: "transform, opacity" }}
+        className="z-[100] border border-[#ffffff28] w-full xl:w-[40vw] min-h-[40vh] flex items-center justify-center bg-black/80 backdrop-blur-lg rounded-[28px]"
       >
         {children}
       </motion.div>
